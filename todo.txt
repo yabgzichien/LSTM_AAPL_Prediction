@@ -1,0 +1,36 @@
+🎯 To Improve Accuracy
+1. Attention Mechanism (Biggest Impact)
+Add a self-attention layer after the LSTM/GRU — this lets the model learn which timesteps in the lookback window matter most. It's the single best architectural upgrade for sequence models.
+
+2. Ensemble the Two Models
+Average the LSTM + GRU predictions. Simple ensembling often beats either model alone:
+
+python
+ensemble_pred = (pred_lstm + pred_gru) / 2
+3. Class Weight Balancing
+Stock returns are rarely 50/50 up/down. If imbalanced, the model biases toward the majority class. Use class_weight in .fit() to penalize the minority class more.
+
+4. Expand Lookback Search
+You're only testing [30, 60]. Try [10, 20, 30, 45, 60, 90] — shorter windows sometimes capture momentum better.
+
+5. Add Sentiment / External Signal
+Fear & Greed Index or VIX derivatives (you already have VIX, but VIX term structure slope is more predictive)
+Lagged features — add Return_lag1, Return_lag5 to give the model explicit momentum memory
+✨ To Make the Project More Appealing
+Addition	Why It Stands Out
+Attention Heatmap	Visualize which past days the model focuses on — professors love interpretability
+SHAP Explainability	Show feature importance per prediction (e.g., "RSI drove this sell signal")
+Ablation Study	Train with/without feature groups to prove each one's contribution
+Confusion Matrix + ROC Curve	Standard but impressive classification visuals
+Rolling Accuracy Plot	Show accuracy over time — reveals if model degrades in volatile periods
+Correlation Heatmap (EDA)	Visualize feature relationships — good storytelling for feature engineering rationale
+Model Comparison Table	Clean summary table of all model variants tested (baseline → +VWAP → +attention, etc.)
+🏆 Recommended Priority
+If you want the highest impact with least effort, I'd suggest implementing these in order:
+
+Attention mechanism → accuracy boost + heatmap visualization (2-in-1)
+Confusion matrix + ROC curve → easy to add, looks polished
+Correlation heatmap in EDA → shows you understand your features
+Ablation study table → proves your feature engineering decisions were deliberate
+Would you like me to implement any of these? I'd recommend starting with the Attention mechanism + heatmap since it improves both the model and the presentation.
+
