@@ -5,7 +5,8 @@ __pycache__/
 
 generate_nb.py
 test.py
-.py
+*.py
+*.txt
 # C extensions
 *.so
 
